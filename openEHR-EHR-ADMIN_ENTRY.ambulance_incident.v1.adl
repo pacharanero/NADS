@@ -1,0 +1,349 @@
+archetype (adl_version=1.4)
+	openEHR-EHR-ADMIN_ENTRY.ambulance_incident.v1
+
+concept
+	[at0000]	-- Ambulance Incident Details
+language
+	original_language = <[ISO_639-1::en]>
+description
+	original_author = <
+		["name"] = <"Marcus Baw">
+		["organisation"] = <"openGPSoC">
+		["email"] = <"marcusbaw@gmail.com">
+		["date"] = <"2014-02-07">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"">
+			use = <"">
+			misuse = <"">
+			copyright = <"">
+		>
+	>
+	lifecycle_state = <"0">
+	other_contributors = <>
+	other_details = <
+		["current_contact"] = <"Marcus Baw, openGPSoC, marcusbaw@gmail.com">
+		["MD5-CAM-1.0.1"] = <"822A5F21F5937C17EC9035A4ABE1631C">
+	>
+
+definition
+	ADMIN_ENTRY[at0000] matches {	-- Ambulance Incident Details
+		subject matches {
+			PARTY_RELATED matches {
+				relationship matches {
+					DV_CODED_TEXT matches {
+						defining_code matches {[openehr::261]}
+					}
+				}
+			}
+		}
+		data matches {
+			ITEM_TREE[at0001] matches {	-- Tree
+				items cardinality matches {0..*; unordered} matches {
+					ELEMENT[at0010] occurrences matches {0..1} matches {	-- Incident Number
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					ELEMENT[at0008] occurrences matches {0..1} matches {	-- Ambulance Service Provider
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					CLUSTER[at0021] occurrences matches {0..1} matches {	-- Call Details
+						items cardinality matches {1..*; unordered} matches {
+							ELEMENT[at0007] occurrences matches {0..1} matches {	-- Caller Is With Patient?
+								value matches {
+									DV_BOOLEAN matches {
+										value matches {True, False}
+									}
+								}
+							}
+							ELEMENT[at0004] occurrences matches {0..1} matches {	-- Patient-Caller Relationship
+								value matches {
+									DV_CODED_TEXT matches {
+										defining_code matches {[local::at0006]}		-- Patient is caller
+									}
+								}
+							}
+							ELEMENT[at0002] occurrences matches {0..1} matches {	-- Caller Details
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0003] occurrences matches {0..1} matches {	-- Source of Call
+								value matches {
+									DV_TEXT matches {*}
+									DV_CODED_TEXT matches {
+										defining_code matches {[local::]}
+									}
+								}
+							}
+							ELEMENT[at0016] occurrences matches {0..1} matches {	-- Time call connected
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+						}
+					}
+					CLUSTER[at0012] occurrences matches {0..1} matches {	-- Time Sequence
+						items cardinality matches {1..*; unordered} matches {
+							ELEMENT[at0011] occurrences matches {0..1} matches {	-- DateTime of Occurrence of Incident
+								value matches {
+									DV_DATE_TIME matches {
+										value matches {yyyy-mm-ddTHH:MM:SS}
+									}
+								}
+							}
+							ELEMENT[at0017] occurrences matches {0..1} matches {	-- DateTime crew mobile
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							ELEMENT[at0013] occurrences matches {0..1} matches {	-- Dispatch DateTime
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							ELEMENT[at0018] occurrences matches {0..1} matches {	-- DateTime of Arriving at Incident
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							ELEMENT[at0019] occurrences matches {0..1} matches {	-- DateTime at Patient
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							ELEMENT[at0020] occurrences matches {0..1} matches {	-- DateTime of Leaving Incident 
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+						}
+					}
+					ELEMENT[at0014] occurrences matches {0..1} matches {	-- Incident Details
+						value matches {
+							DV_TEXT matches {*}
+						}
+					}
+					CLUSTER[at0022] occurrences matches {0..1} matches {	-- Transit Details
+						items cardinality matches {1..*; unordered} matches {
+							ELEMENT[at0035] occurrences matches {0..*} matches {	-- Other persons carried
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0024] occurrences matches {0..1} matches {	-- Emergency Driving Exemption Applies?
+								value matches {
+									DV_BOOLEAN matches {
+										value matches {True, False}
+									}
+								}
+							}
+							ELEMENT[at0023] occurrences matches {0..1} matches {	-- Time in Transit
+								value matches {
+									DV_DURATION matches {*}
+								}
+							}
+						}
+					}
+					CLUSTER[at0025] occurrences matches {0..1} matches {	-- Disposition Details
+						items cardinality matches {1..*; unordered} matches {
+							ELEMENT[at0031] occurrences matches {0..1} matches {	-- Disposition Type
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0027] occurrences matches {0..1} matches {	-- Arrival at Handover Destination DateTime
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							allow_archetype CLUSTER[at0032] occurrences matches {0..*} matches {	-- Professional Receiving Handover
+								include
+									archetype_id/value matches {/openEHR-EHR-CLUSTER\.individual_professional(-[a-zA-Z0-9_]+)*\.v1/}
+							}
+							allow_archetype CLUSTER[at0033] occurrences matches {0..*} matches {	-- Role of Professional Receiving Handover
+								include
+									archetype_id/value matches {/openEHR-EHR-CLUSTER\.professional_role(-[a-zA-Z0-9_]+)*\.v1/}
+							}
+							ELEMENT[at0029] occurrences matches {0..1} matches {	-- Notification of Arrival at Handover Destination DateTime
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							ELEMENT[at0028] occurrences matches {0..1} matches {	-- Handover Destination
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+							ELEMENT[at0030] occurrences matches {0..1} matches {	-- Handover DateTime
+								value matches {
+									DV_DATE_TIME matches {*}
+								}
+							}
+							ELEMENT[at0026] occurrences matches {0..1} matches {	-- Pre-alert
+								value matches {
+									DV_TEXT matches {*}
+								}
+							}
+						}
+					}
+					ELEMENT[at0034] occurrences matches {0..*} matches {	-- Other Agencies Present at Incident
+						value matches {
+							DV_TEXT matches {*}
+							DV_CODED_TEXT matches {
+								defining_code matches {[local::]}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Ambulance Incident Details">
+					description = <"Admin event containing the non-clinical aspects pertaining to a single instance of ambulance care">
+				>
+				["at0001"] = <
+					text = <"Tree">
+					description = <"@ internal @">
+				>
+				["at0002"] = <
+					text = <"Caller Details">
+					description = <"Details of the person making the call  to Ambulance control">
+				>
+				["at0003"] = <
+					text = <"Source of Call">
+					description = <"The source from which the ambulance call was received - examples include 999, 112, 911 telephone numbers, hospital transfers, police">
+				>
+				["at0004"] = <
+					text = <"Patient-Caller Relationship">
+					description = <"Relationship between the caller and the patient. May be able to borrow from existing refsets about familial relationships? Alternatively the refset may be too large when all types of professional are included, so could leave it as free text.">
+				>
+				["at0006"] = <
+					text = <"Patient is caller">
+					description = <"*">
+				>
+				["at0007"] = <
+					description = <"Is the caller with the patient?">
+					text = <"Caller Is With Patient?">
+					comment = <"There's almost certainly a \"don't know\" or \"maybe\" case we could think of, but for now a Boolean will do.">
+				>
+				["at0008"] = <
+					text = <"Ambulance Service Provider">
+					description = <"The name or other reference term of the ambulance service provider">
+				>
+				["at0010"] = <
+					description = <"*">
+					text = <"Incident Number">
+					comment = <"This has been deliberately left as a text field because although UK ambulance services use a number, this may not be internationally applicable.">
+				>
+				["at0011"] = <
+					text = <"DateTime of Occurrence of Incident">
+					description = <"Date and time of the incident, ">
+				>
+				["at0012"] = <
+					text = <"Time Sequence">
+					description = <"*">
+				>
+				["at0013"] = <
+					text = <"Dispatch DateTime">
+					description = <"The time the incident was allocated to the ambulance crew or individual responder.">
+				>
+				["at0014"] = <
+					text = <"Incident Details">
+					description = <"*">
+				>
+				["at0016"] = <
+					description = <"*">
+					text = <"Time call connected">
+					comment = <"The time that the call is connected to the ambulance control centre switchboard">
+				>
+				["at0017"] = <
+					text = <"DateTime crew mobile">
+					description = <"*">
+				>
+				["at0018"] = <
+					text = <"DateTime of Arriving at Incident">
+					description = <"*">
+				>
+				["at0019"] = <
+					text = <"DateTime at Patient">
+					description = <"*">
+				>
+				["at0020"] = <
+					text = <"DateTime of Leaving Incident ">
+					description = <"*">
+				>
+				["at0021"] = <
+					text = <"Call Details">
+					description = <"*">
+				>
+				["at0022"] = <
+					text = <"Transit Details">
+					description = <"*">
+				>
+				["at0023"] = <
+					text = <"Time in Transit">
+					description = <"*">
+				>
+				["at0024"] = <
+					text = <"Emergency Driving Exemption Applies?">
+					description = <"*">
+				>
+				["at0025"] = <
+					text = <"Disposition Details">
+					description = <"*">
+				>
+				["at0026"] = <
+					text = <"Pre-alert">
+					description = <"Record of whether information has been transmitted to the expected handover destination prior to arrival (Y/N).">
+				>
+				["at0027"] = <
+					text = <"Arrival at Handover Destination DateTime">
+					description = <"*">
+				>
+				["at0028"] = <
+					text = <"Handover Destination">
+					description = <"Details of the hospital or other location where handover occurs.  This may also include team or department.">
+				>
+				["at0029"] = <
+					text = <"Notification of Arrival at Handover Destination DateTime">
+					description = <"*">
+				>
+				["at0030"] = <
+					text = <"Handover DateTime">
+					description = <"*">
+				>
+				["at0031"] = <
+					text = <"Disposition Type">
+					description = <"The type of disposition including handover (eg to A&E, from community first responder to ambulance crew), referral (to other service), discharge (e.g. home or self discharge).">
+				>
+				["at0032"] = <
+					text = <"Professional Receiving Handover">
+					description = <"Demographic details of professional receiving handover.">
+				>
+				["at0033"] = <
+					text = <"Role of Professional Receiving Handover">
+					description = <"*">
+				>
+				["at0034"] = <
+					text = <"Other Agencies Present at Incident">
+					description = <"Other agencies present such as ">
+				>
+				["at0035"] = <
+					text = <"Other persons carried">
+					description = <"Persons other than the patient carried in the ambulance or other mode of transport. This may include relatives of the patient, anaesthetist or nurse escort.">
+				>
+			>
+		>
+	>
