@@ -26,4 +26,5 @@ FILES
 
 * National Ambulance Documentation Standard_Final headings.pdf is the standard from which I have developed these archatypes. I'm jumping the gun in putting it on here but I think it's unlikely that the RCP get on GitHub that much these days. (reminds me of a joke: how do you hide a fiver from an orthpaedic surgeon? put it in the patient's notes)
 
-* NADS - National Ambulance Documentation Standards Consultation Mindmap based on .docx version 0.3 late Jan 2014.xmind   * this is a mindmap of the whole standard showing all the nodes (=sections) and leaves (=data fields). Xmind is free and open source, crossplatform and awesome. http://www.xmind.net/
+* NADS - National Ambulance Documentation Standards Consultation Mindmap based on .docx version 0.3 late Jan 2014.xmind
+  * this is a mindmap of the whole standard showing all the nodes (=sections) and leaves (=data fields). Xmind is free and open source, crossplatform and awesome. http://www.xmind.net/
